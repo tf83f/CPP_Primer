@@ -409,6 +409,125 @@ int exercise_3_42() {
     return 0;
 }
 
+int exercise_3_43() {
+    /*
+    Write three different versions of a program to print the elements of ia. 
+    One version should use a range for to manage the iteration, the other two should use an ordinary for loop in one case using subscripts and in the other using pointers. 
+    In all three programs write all the types directly. 
+    That is, do not use a type alias, auto, or decltype to simplify the code.
+    */
+
+    int ia[3][4] = {
+        {0, 1, 2, 3},
+        {4, 5, 6, 7},
+        {8, 9, 10, 11}
+    };
+
+    // using range for loop
+    for (int (&row)[4] : ia) {
+        for (int col : row) {
+            cout << col << " ";
+        }
+        cout << endl;
+    }
+
+    // using regular for loop with subscripts
+    for (size_t i = 0; i != 3; ++i) {
+        for (size_t j = 0; j != 4; ++j) {
+            cout << ia[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    // using regular for loop with pointers
+    for (int (*p)[4] = ia; p != ia + 3; ++p) {
+        for (int *q = *p; q != *p + 4; ++q) {
+            cout << *q << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
+
+int exercise_3_44() {
+    /*
+    Rewrite the programs from the previous exercises using a type alias for the type of the loop control variables.
+    */
+
+    using int_array = int[4]; 
+
+    int ia[3][4] = {
+        {0, 1, 2, 3},
+        {4, 5, 6, 7},
+        {8, 9, 10, 11}
+    };
+
+    // using range for loop
+    for (int_array &row : ia) { // using the type alias
+        for (int col : row) {
+            cout << col << " ";
+        }
+        cout << endl;
+    }
+
+    // using regular for loop with subscripts
+    for (size_t i = 0; i != 3; ++i) {
+        for (size_t j = 0; j != 4; ++j) {
+            cout << ia[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    // using regular for loop with pointers
+    for (int_array *p = ia; p != ia + 3; ++p) { // using the type alias
+        for (int *q = *p; q != *p + 4; ++q) {
+            cout << *q << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
+
+int exercise_3_45() {
+    /*
+    Rewrite the programs again, this time using auto.
+    */
+   
+    int ia[3][4] = {
+        {0, 1, 2, 3},
+        {4, 5, 6, 7},
+        {8, 9, 10, 11}
+    };
+
+    // using range for loop with auto
+    for (auto &row : ia) {
+        for (auto col : row) {
+            cout << col << " ";
+        }
+        cout << endl;
+    }
+
+    // using regular for loop with subscripts and auto
+    for (auto i = 0; i != 3; ++i) {
+        for (auto j = 0; j != 4; ++j) {
+            cout << ia[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    // using regular for loop with pointers and auto
+    for (auto p = ia; p != ia + 3; ++p) {
+        for (auto q = *p; q != *p + 4; ++q) {
+            cout << *q << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
+
 int main() {
     return 0;
 }
